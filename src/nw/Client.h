@@ -4,16 +4,15 @@
 
 #include "LockedQueue.h"
 
-#include <asio.hpp>
+#include <boost/asio.hpp>
 
 #include <array>
 #include <thread>
 #include "IClient.h"
 
+using boost::asio::ip::udp;
 
-using asio::ip::udp;
-
-namespace NetworkLib {
+namespace merci::nw {
 	class Client : public IClient {
 	public:
 		Client(std::string host, unsigned short server_port, unsigned short local_port = 0);
@@ -27,7 +26,7 @@ namespace NetworkLib {
 
 	private:
 		// Network send/receive stuff
-		asio::io_service io_service;
+		boost::asio::io_service io_service;
 		udp::socket socket;
 		udp::endpoint server_endpoint;
 		udp::endpoint remote_endpoint;

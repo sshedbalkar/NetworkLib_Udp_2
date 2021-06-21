@@ -1,47 +1,29 @@
-#include "targetver.h"
 #include "Statistics.h"
 #include <iomanip>
 #include <array>
 #include <sstream>
 
-namespace NetworkLib {
-	Statistics::Statistics() :
-		receivedMessages(0), sentMessages(0), receivedBytes(0), sentBytes(0)
-	{
-	}
+namespace merci::nw {
+Statistics::Statistics()
+    : receivedMessages(0), sentMessages(0), receivedBytes(0), sentBytes(0) {}
 
-	Statistics::Statistics(const Statistics& other) :
-		receivedMessages(other.GetReceivedMessages()),
-		sentMessages(other.GetSentMessages()),
-		receivedBytes(other.GetReceivedBytes()),
-		sentBytes(other.GetSentBytes())
-	{
-	}
+Statistics::Statistics(const Statistics& other)
+    : receivedMessages(other.GetReceivedMessages()),
+      sentMessages(other.GetSentMessages()),
+      receivedBytes(other.GetReceivedBytes()),
+      sentBytes(other.GetSentBytes()) {}
 
-	unsigned Statistics::GetReceivedMessages() const
-	{
-		return receivedMessages;
-	}
+unsigned Statistics::GetReceivedMessages() const { return receivedMessages; }
 
-	uint64_t Statistics::GetReceivedBytes() const
-	{
-		return receivedBytes;
-	}
+uint64_t Statistics::GetReceivedBytes() const { return receivedBytes; }
 
-	unsigned Statistics::GetSentMessages() const
-	{
-		return sentMessages;
-	}
+unsigned Statistics::GetSentMessages() const { return sentMessages; }
 
-	uint64_t Statistics::GetSentBytes() const
-	{
-		return sentBytes;
-	}
+uint64_t Statistics::GetSentBytes() const { return sentBytes; }
 
-	void Statistics::RegisterSentMessage(int32_t num_bytes)
-	{
-		++sentMessages;
-		sentBytes.fetch_add(num_bytes);
+void Statistics::RegisterSentMessage(int32_t num_bytes) {
+    ++sentMessages;
+    sentBytes.fetch_add(num_bytes);
 	}
 
 	void Statistics::RegisterReceivedMessage(int32_t messageSize)
@@ -74,4 +56,4 @@ namespace NetworkLib {
 			<< data_size_to_string(stat.GetReceivedBytes()) << ")";
 		return os;
 	}
-}
+        }    // namespace merci::nw

@@ -1,0 +1,83 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "cd_workspace",
+            "type": "shell",
+            "command": "cd",
+            "args": [
+                "${workspaceRoot}"
+            ]
+        },
+        {
+            "label": "_lnx_build",
+            "type": "shell",
+            "options": {
+                "cwd": "${workspaceRoot}"
+            },
+            "command": "${workspaceRoot}/scripts/lnx_rebuild.sh",
+            "args": [],
+            "group": {
+                "kind": "test",
+                "isDefault": true
+            },
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "lnx_build",
+            "dependsOn": [
+                "cd_workspace",
+                "_lnx_build"
+            ],
+            "dependsOrder": "sequence",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "lnx_format_cpp_file",
+            "type": "shell",
+            "command": "${workspaceRoot}/scripts/lnx_formatFile.sh",
+            "options": {
+                "cwd": "${workspaceRoot}"
+            },
+            "args": [
+                "${file}"
+            ],
+            "group": "none",
+            "presentation": {
+                "echo": false,
+                "reveal": "never",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": false,
+                "clear": false
+            },
+            "problemMatcher": "$gcc"
+        },
+        {
+            "label": "lnx_run_build",
+            "type": "shell",
+            "options": {
+                "cwd": "${workspaceRoot}"
+            },
+            "command": "${workspaceRoot}/scripts/lnx_run.sh",
+            "args": [],
+            "group": {
+                "kind": "test",
+                "isDefault": true
+            },
+            "presentation": {
+                "reveal":"always",
+                "panel": "shared",
+                "showReuseMessage": false,
+            },
+            "problemMatcher": []
+        }
+    ]
+}
